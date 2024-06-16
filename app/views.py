@@ -53,7 +53,7 @@ def PlaylistDetailView(request, pk):
     # Dividimos entre el número de canciones para obtener la media
     features = features / len(songs)
     features = features.astype(float)
-    
+
     features_dict = {}
     f = dict()
     for i in range(len(features)):
@@ -117,7 +117,7 @@ def PlaylistDetailView(request, pk):
                 f[claves[i]] += 'Parece que la playlist es bastante instrumental.'
             else:
                 f[claves[i]] += 'Parece que la playlist es muy instrumental.'
-        features_dict[claves[i]] = features[i]
+        features_dict[claves[i]] = float(features[i])
 
     return render(request, 'playlist.html',
                   {'playlist': playlist, 'audio_features': response, 'last_song': last_song, 'mean_feat': features_dict, 'genres': genres, 'explanation': f})
