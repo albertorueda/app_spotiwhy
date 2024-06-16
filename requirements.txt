@@ -18,3 +18,9 @@ Pillow==9.4.0
 # "psycopg2-binary==2.9.5" por "psycopg2-binary" 
 # Esto es , quitar la versión
 psycopg2-binary==2.9.5
+spotipy
+pyyaml
+recbole
+kmeans-pytorch
+ray
+ray[tune]
