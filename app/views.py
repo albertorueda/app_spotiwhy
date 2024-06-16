@@ -130,21 +130,21 @@ def recommend(request, pk):
     
     if model == 'knn':
         # Obtenemos las 25 canciones recomendadas
-        preds = pd.read_csv('C:\\Users\\alber\\Desktop\\tfg info\\SpotiWhy\\app_django\\spotiwhy\\app\\static\\models\\predictions_knn.tsv', sep='\t', header=None)
+        preds = pd.read_csv('app/static/models/predictions_knn.tsv', sep='\t', header=None)
         preds = preds[preds[0] == pk][1].to_list()[:25]
         # Obtenemos las canciones de la base de datos que coinciden con las recomendadas
         recs = Song.objects.filter(external_id__in=preds)
 
     elif model == 'gru4rec':
          # Obtenemos las 25 canciones recomendadas
-        preds = pd.read_csv('C:\\Users\\alber\\Desktop\\tfg info\\SpotiWhy\\app_django\\spotiwhy\\app\\static\\models\\predictions_gru.tsv', sep='\t', header=None)
+        preds = pd.read_csv('app/static/models/predictions_gru.tsv', sep='\t', header=None)
         preds = preds[preds[0] == pk][1].to_list()[:25]
         # Obtenemos las canciones de la base de datos que coinciden con las recomendadas
         recs = Song.objects.filter(external_id__in=preds)
 
     elif model == 'Pop':
         # Obtenemos las 25 canciones recomendadas
-        preds = pd.read_csv('C:\\Users\\alber\\Desktop\\tfg info\\SpotiWhy\\app_django\\spotiwhy\\app\\static\\models\\predictions_pop.tsv', sep='\t', header=None)
+        preds = pd.read_csv('app/static/models/predictions_pop.tsv', sep='\t', header=None)
         preds = preds[preds[0] == pk][1].to_list()[:25]
         # Obtenemos las canciones de la base de datos que coinciden con las recomendadas
         recs = Song.objects.filter(external_id__in=preds)
