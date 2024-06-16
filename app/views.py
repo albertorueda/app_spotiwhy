@@ -52,6 +52,8 @@ def PlaylistDetailView(request, pk):
     features = features.sum()
     # Dividimos entre el número de canciones para obtener la media
     features = features / len(songs)
+    features = features.astype(float)
+    
     features_dict = {}
     f = dict()
     for i in range(len(features)):
