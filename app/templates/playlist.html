@@ -14,7 +14,7 @@
         <p class="text-white mt-0">Número de canciones: {{ playlist.n_Songs }}</p>
     </div>
     <div class="contenedor_principal">
-        <div class="mitad izquierda ">
+        <div class="mitad izquierda">
             <h4 class="text-white">Canciones</h4>
             <div class="overflow-auto p-2 lista_canciones lista_izquierda">
                 <ul>
@@ -27,7 +27,7 @@
                                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                                     loading="lazy">
                                 </iframe>
-                            </div>
+                            </div>                            
                         </li>
                     {% endfor %}
                 </ul>
@@ -45,7 +45,7 @@
         <div class="separacion"></div>
         <div class="mitad derecha">
             <h4 class="text-white">Valores medios de la playlist</h4>
-            <div class="p-2 pl_derecha lista_canciones">
+            <div class="p-2 feats lista_canciones">
                 <div class="feats-container text-center text-white">
                     <div class="bars-container">
                         <div class="bar-container acousticness" data-tooltip="Acousticness indica cuán acústica es la canción.">
@@ -91,7 +91,7 @@
                             <div class="value-label"></div>
                         </div>
                     </div>
-                </div>
+                </div>                
             </div>
             <h4 class="text-white mt-2">Géneros de la playlist</h4>
             <div class="p-2 pl_derecha lista_canciones">
@@ -115,10 +115,6 @@
                 </div>
                 <button class="btn mt-3 generar" type="submit">Generar recomendaciones</button>
             </form>   
-                        <!--<option value="knn">Canciones similares</option>
-                        <option value="gru4rec">En busca de la transición</option>
-                        <option value="Pop">Las más populares</option>
-                        <option value="random">Fiesta aleatoria</option> -->          
         </div>
     </div>
     <div class="popup-overlay" id="popup-overlay"></div>
@@ -166,33 +162,35 @@
         
         atributos.forEach(atributo => {
             const valor = (valores[atributo]*100).toFixed(2);
-            const barra = document.querySelector(`.${atributo} .value-playlist`);
-            const etiqueta = document.querySelector(`.${atributo} .value-label`);
+            const barra = document.querySelector(`.${atributo} .bar-inner`);
+            const valorEtiqueta = document.querySelector(`.${atributo} .value-label`);
             
-            barra.style.width = valor + '%';
-            etiqueta.textContent = valor;
+            barra.style.width = `${valor}%`;
+            valorEtiqueta.textContent = `${valor}%`;
         });
     }
-
-    // Actualizar las barras con los valores pasados
+    
+    // Llamar a la función para actualizar las barras
     actualizarBarras(valoresCancion);
 
     // Lazy loading de iframes
-    const iframes = document.querySelectorAll('iframe[data-src]');
+    document.addEventListener('DOMContentLoaded', function() {
+        const iframes = document.querySelectorAll('iframe[data-src]');
 
-    const iframeObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const iframe = entry.target;
-                iframe.src = iframe.dataset.src;
-                observer.unobserve(iframe);
-            }
+        const iframeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target;
+                    iframe.src = iframe.dataset.src;
+                    observer.unobserve(iframe);
+                }
+            });
+        });
+
+        iframes.forEach(iframe => {
+            iframeObserver.observe(iframe);
         });
     });
 
-    iframes.forEach(iframe => {
-        iframeObserver.observe(iframe);
-    });
 </script>
-
 {% endblock %}
