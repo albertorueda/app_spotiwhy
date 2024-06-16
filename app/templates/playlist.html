@@ -124,6 +124,7 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const infoData = {{ explanation|safe }};
@@ -155,8 +156,6 @@
     
     // Valores pasados desde Django al template
     const valoresCancion = {{ mean_feat|safe }};
-
-    alert(valoresCancion);
 
     // Función para actualizar las barras dinámicamente
     function actualizarBarras(valores) {
