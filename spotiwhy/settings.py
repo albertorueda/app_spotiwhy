@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,20 +83,27 @@ WSGI_APPLICATION = 'spotiwhy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# Replace the DATABASES section of your settings.py with this
-DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': os.getenv('PGDATABASE'),
-    'USER': os.getenv('PGUSER'),
-    'PASSWORD': os.getenv('PGPASSWORD'),
-    'HOST': os.getenv('PGHOST'),
-    'PORT': os.getenv('PGPORT', 5432),
-    'OPTIONS': {
-      'sslmode': 'require',
-    },
-  }
-}
+DATABASES = {}
+
+POSTGRESQL_URL = 'postgres://alumnodb:alumnodb@localhost:5432/psi'
+
+if 'TESTING' in os.environ:
+    db_from_env = dict()
+    db_from_env['ENGINE'] = 'django.db.backends.sqlite3'
+    db_from_env['NAME'] = BASE_DIR / 'db.sqlite3'
+else:
+    # dj_database_url will check for the
+    # variable DATABASE_URL.
+    # It should point to NEON but during
+    # development it may be interesting
+    # to have access to a localpostgres database
+    # so if DATABASE_URL is not define d use POSTGRESQL_URL
+    db_from_env = dj_database_url.config(
+        default=POSTGRESQL_URL,
+        conn_max_age=500
+    )
+
+DATABASES['default'] = db_from_env
 
 
 # Password validation
