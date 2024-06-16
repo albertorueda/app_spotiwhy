@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ playlist.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-2">
+    <div class="info">
+        <h2 class="text-white">{{ playlist.name }}</h2>
+        {% if playlist.description %}
+            <p class="text-white mb-0">{{ playlist.description }}</p>
+        {% endif %}
+        <p class="text-white mt-0">Número de canciones: {{ playlist.n_Songs }}</p>
+    </div>
+    <div class="contenedor_principal">
+        <div class="mitad izquierda ">
+            <h4 class="text-white">Canciones</h4>
+            <div class="overflow-auto p-2 lista_canciones lista_izquierda">
+                <ul>
+                    {% for af in audio_features %}
+                        <li style="margin: 0; padding: 0;">
+                            <div class="iframe-container">
+                                <iframe style="border-radius:12px; margin: 0; padding: 0; height: 85px;"
+                                    data-src="https://open.spotify.com/embed/track/{{af.song.external_id}}?utm_source=generator&theme=0"
+                                    width="100%" height="125" frameBorder="0" allowfullscreen=""
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <h4 class="mt-3 text-white">Última canción</h4>
+            <div class="iframe-container mt-2">
+                <iframe style="border-radius:12px; margin: 0; padding: 0; height: 85px;"
+                    data-src="https://open.spotify.com/embed/track/{{last_song.external_id}}?utm_source=generator&theme=0"
+                    width="100%" height="125" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+        <div class="separacion"></div>
+        <div class="mitad derecha">
+            <h4 class="text-white">Valores medios de la playlist</h4>
+            <div class="p-2 pl_derecha lista_canciones">
+                <div class="feats-container text-center text-white">
+                    <div class="bars-container">
+                        <div class="bar-container acousticness" data-tooltip="Acousticness indica cuán acústica es la canción.">
+                            <div class="bar-label">acousticness</div>
+                            <div class="bar">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                            <div class="value-label"></div>
+                        </div>
+                        <div class="bar-container danceability" data-tooltip="Danceability indica la facilidad con la que se puede bailar la canción.">
+                            <div class="bar-label">danceability</div>
+                            <div class="bar">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                            <div class="value-label"></div>
+                        </div>
+                        <div class="bar-container energy" data-tooltip="Energy indica el nivel de energía de la canción.">
+                            <div class="bar-label">energy</div>
+                            <div class="bar">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                            <div class="value-label"></div>
+                        </div>
+                        <div class="bar-container instrumentalness" data-tooltip="Instrumentalness indica el nivel de instrumentalidad de la canción.">
+                            <div class="bar-label">instrumentalness</div>
+                            <div class="bar">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                            <div class="value-label"></div>
+                        </div>
+                        <div class="bar-container tempo" data-tooltip="Tempo indica el ritmo de la canción en BPM.">
+                            <div class="bar-label">tempo</div>
+                            <div class="bar">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                            <div class="value-label"></div>
+                        </div>
+                        <div class="bar-container valence" data-tooltip="Valence indica la positividad de la canción.">
+                            <div class="bar-label">valence</div>
+                            <div class="bar">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                            <div class="value-label"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="text-white mt-2">Géneros de la playlist</h4>
+            <div class="p-2 pl_derecha lista_canciones">
+                <div class="genres-container text-center text-white">
+                    {% for genre in genres %}
+                        <div class="genre mt-2">{{genre}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <form class="mt-4" action="{% url 'recommend' playlist.id %}" method="post">
+                {% csrf_token %}
+                <!-- Lista desplegable con etiqueta -->
+                <div class="dropdown d-flex align-items-center">
+                    <label for="model-select" class="text-white mr-2">Selecciona un modelo:</label>
+                    <select id="model-select" class="form-control" name="model">
+                        <option value="knn">Canciones similares</option>
+                        <option value="gru4rec">En busca de la transición</option>
+                        <option value="Pop">Las más populares</option>
+                        <option value="random">Fiesta aleatoria</option>
+                    </select>
+                </div>
+                <button class="btn mt-3 generar" type="submit">Generar recomendaciones</button>
+            </form>   
+                        <!--<option value="knn">Canciones similares</option>
+                        <option value="gru4rec">En busca de la transición</option>
+                        <option value="Pop">Las más populares</option>
+                        <option value="random">Fiesta aleatoria</option> -->          
+        </div>
+    </div>
+    <div class="popup-overlay" id="popup-overlay"></div>
+    <div class="popup" id="popup">
+        <div class="popup-close" id="popup-close">&times;</div>
+        <div class="popup-content" id="popup-content"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const infoData = {{ explanation|safe }};
+        const popup = document.getElementById('popup');
+        const popupOverlay = document.getElementById('popup-overlay');
+        const popupContent = document.getElementById('popup-content');
+        const popupClose = document.getElementById('popup-close');
+
+        document.querySelectorAll('.bar-label').forEach(label => {
+            label.addEventListener('click', function() {
+                const attribute = this.textContent.trim();
+                const info = infoData[attribute] || 'No information available.';
+                popupContent.innerHTML = info;
+                popup.style.display = 'block';
+                popupOverlay.style.display = 'block';
+            });
+        });
+
+        popupClose.addEventListener('click', function() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        });
+
+        popupOverlay.addEventListener('click', function() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        });
+    });
+    
+    // Valores pasados desde Django al template
+    const valoresCancion = {{ mean_feat|safe }};
+
+    // Función para actualizar las barras dinámicamente
+    function actualizarBarras(valores) {
+        const atributos = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'tempo', 'valence'];
+        
+        atributos.forEach(atributo => {
+            const valor = (valores[atributo]*100).toFixed(2);
+            const barra = document.querySelector(`.${atributo} .value-playlist`);
+            const etiqueta = document.querySelector(`.${atributo} .value-label`);
+            
+            barra.style.width = valor + '%';
+            etiqueta.textContent = valor;
+        });
+    }
+
+    // Actualizar las barras con los valores pasados
+    actualizarBarras(valoresCancion);
+
+    // Lazy loading de iframes
+    const iframes = document.querySelectorAll('iframe[data-src]');
+
+    const iframeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const iframe = entry.target;
+                iframe.src = iframe.dataset.src;
+                observer.unobserve(iframe);
+            }
+        });
+    });
+
+    iframes.forEach(iframe => {
+        iframeObserver.observe(iframe);
+    });
+</script>
+
+{% endblock %}
