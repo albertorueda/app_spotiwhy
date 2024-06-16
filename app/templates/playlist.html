@@ -156,6 +156,8 @@
     // Valores pasados desde Django al template
     const valoresCancion = {{ mean_feat|safe }};
 
+    alert(valoresCancion);
+
     // Función para actualizar las barras dinámicamente
     function actualizarBarras(valores) {
         const atributos = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'tempo', 'valence'];
