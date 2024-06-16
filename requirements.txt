@@ -1,9 +1,5 @@
 dj-database-url==0.5.0
-<<<<<<< HEAD
-Django==3.2.1
-=======
 Django==4.2
->>>>>>> 3d00a5c889ae67cc886b5bd07d686245a575b7a6
 django-cors-headers==3.2.1
 django-crispy-forms==1.9.2
 djangorestframework==3.13
@@ -22,12 +18,3 @@ Pillow==9.4.0
 # "psycopg2-binary==2.9.5" por "psycopg2-binary" 
 # Esto es , quitar la versión
 psycopg2-binary==2.9.5
-<<<<<<< HEAD
-spotipy
-pyyaml
-recbole
-kmeans-pytorch
-ray
-ray[tune]
-=======
->>>>>>> 3d00a5c889ae67cc886b5bd07d686245a575b7a6
