@@ -214,6 +214,6 @@ def recommend(request, pk):
     features = features / len(songs)
     features_dict = {}
     for i in range(len(features)):
-        features_dict[claves[i]] = features[i]
+        features_dict[claves[i]] = float(features[i])
 
     return render(request, 'recommend.html', {'mean_feat': features_dict, 'recs': recs_info, 'playlist': playlist})
