@@ -11,7 +11,128 @@
     <div class="info">
         <h2 class="text-white">Recomendaciones para {{ playlist.name }}</h2>
     </div>
-    <div class="contenedor_principal">
+    <div class="contenedor_principal_movil">
+        <div class="botones">
+            <svg onclick="previous()" xmlns="http://www.w3.org/2000/svg" width="8%" height="64" fill="white" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1"/>
+            </svg>
+            <iframe id="spotify-iframe" style="border-radius:12px; margin: 0; padding: 0; height: 85px;"
+                    width="75%" height="125" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            <svg onclick="next()" xmlns="http://www.w3.org/2000/svg" width="8%" height="64" fill="white" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1"/>
+            </svg>
+        </div>        
+        <h4 class="text-white">Comparación de la canción con la playlist</h4>
+        <div class="p-2 recs_derecha lista_canciones_recs">
+            <div class="feats-container text-center text-white">
+                <div class="bars-container">
+                    <div class="bar-container acousticness">
+                        <div class="bar-label">acousticness</div>
+                        <div class="two-bar">
+                            <div class="bar">
+                                <div class="bar-inner value-song"></div>
+                            </div>
+                            <div class="bar mt-1">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                        </div>
+                        <div class="values-container">
+                            <div class="value-song-label">-</div>
+                            <div class="value-playlist-label mt-1"></div>
+                        </div>
+                    </div>
+                    <div class="bar-container danceability">
+                        <div class="bar-label">danceability</div>
+                        <div class="two-bar">
+                            <div class="bar">
+                                <div class="bar-inner value-song"></div>
+                            </div>
+                            <div class="bar mt-1">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                        </div>
+                        <div class="values-container">
+                            <div class="value-song-label">-</div>
+                            <div class="value-playlist-label mt-1"></div>
+                        </div>
+                    </div>
+                    <div class="bar-container energy">
+                        <div class="bar-label">energy</div>
+                        <div class="two-bar">
+                            <div class="bar">
+                                <div class="bar-inner value-song"></div>
+                            </div>
+                            <div class="bar mt-1">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                        </div>
+                        <div class="values-container">
+                            <div class="value-song-label">-</div>
+                            <div class="value-playlist-label mt-1"></div>
+                        </div>
+                    </div>
+                    <div class="bar-container instrumentalness">
+                        <div class="bar-label">instrumentalness</div>
+                        <div class="two-bar">
+                            <div class="bar">
+                                <div class="bar-inner value-song"></div>
+                            </div>
+                            <div class="bar mt-1">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                        </div>
+                        <div class="values-container">
+                            <div class="value-song-label">-</div>
+                            <div class="value-playlist-label mt-1"></div>
+                        </div>
+                    </div>
+                    <div class="bar-container tempo">
+                        <div class="bar-label">tempo</div>
+                        <div class="two-bar">
+                            <div class="bar">
+                                <div class="bar-inner value-song"></div>
+                            </div>
+                            <div class="bar mt-1">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                        </div>
+                        <div class="values-container">
+                            <div class="value-song-label">-</div>
+                            <div class="value-playlist-label mt-1"></div>
+                        </div>
+                    </div>
+                    <div class="bar-container valence">
+                        <div class="bar-label">valence</div>
+                        <div class="two-bar">
+                            <div class="bar">
+                                <div class="bar-inner value-song"></div>
+                            </div>
+                            <div class="bar mt-1">
+                                <div class="bar-inner value-playlist"></div>
+                            </div>
+                        </div>
+                        <div class="values-container">
+                            <div class="value-song-label">-</div>
+                            <div class="value-playlist-label mt-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4 class="text-white mt-2">Géneros en común de la canción con la playlist</h4>
+        <div class="p-2 generos_recs lista_canciones_recs">
+            <div class="genres-container text-center text-white">
+                    <div class="genre none mt-2" id="genre1"></div>
+                    <div class="genre none mt-2" id="genre2"></div>
+                    <div class="genre none mt-2" id="genre3"></div>
+                    <div class="genre none mt-2" id="genre4"></div>
+                    <div class="genre none mt-2" id="genre5"></div>
+            </div>
+        </div>
+    </div>
+    <div class="contenedor_principal_ordenador">
         <div class="mitad izquierda">
             <h4 class="text-white">Recomendaciones</h4>
             <div class="overflow-auto p-2 lista_canciones lista_derecha">
@@ -20,7 +141,7 @@
                         <li style="margin: 0; padding: 0;">
                             <div class="iframe-container">
                                 <iframe style="border-radius:12px; margin: 0; padding: 0; height: 85px;"
-                                    onmouseover="actualizar({{ r|safe }})"
+                                    onmouseover="actualizar({{ r|safe }}, {{ mean_feat|safe }})"
                                     data-src="https://open.spotify.com/embed/track/{{r.id}}?utm_source=generator&theme=0"
                                     width="100%" height="125" frameBorder="0" allowfullscreen=""
                                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -42,90 +163,90 @@
                             <div class="bar-label">acousticness</div>
                             <div class="two-bar">
                                 <div class="bar">
-                                    <div class="bar-inner value-song"></div>
+                                    <div class="bar-inner value-song-pl"></div>
                                 </div>
                                 <div class="bar mt-1">
-                                    <div class="bar-inner value-playlist"></div>
+                                    <div class="bar-inner value-playlist-pl"></div>
                                 </div>
                             </div>
                             <div class="values-container">
-                                <div class="value-song-label">-</div>
-                                <div class="value-playlist-label mt-1"></div>
+                                <div class="value-song-label-pl">-</div>
+                                <div class="value-playlist-label-pl mt-1"></div>
                             </div>
                         </div>
                         <div class="bar-container danceability">
                             <div class="bar-label">danceability</div>
                             <div class="two-bar">
                                 <div class="bar">
-                                    <div class="bar-inner value-song"></div>
+                                    <div class="bar-inner value-song-pl"></div>
                                 </div>
                                 <div class="bar mt-1">
-                                    <div class="bar-inner value-playlist"></div>
+                                    <div class="bar-inner value-playlist-pl"></div>
                                 </div>
                             </div>
                             <div class="values-container">
-                                <div class="value-song-label">-</div>
-                                <div class="value-playlist-label mt-1"></div>
+                                <div class="value-song-label-pl">-</div>
+                                <div class="value-playlist-label-pl mt-1"></div>
                             </div>
                         </div>
                         <div class="bar-container energy">
                             <div class="bar-label">energy</div>
                             <div class="two-bar">
                                 <div class="bar">
-                                    <div class="bar-inner value-song"></div>
+                                    <div class="bar-inner value-song-pl"></div>
                                 </div>
                                 <div class="bar mt-1">
-                                    <div class="bar-inner value-playlist"></div>
+                                    <div class="bar-inner value-playlist-pl"></div>
                                 </div>
                             </div>
                             <div class="values-container">
-                                <div class="value-song-label">-</div>
-                                <div class="value-playlist-label mt-1"></div>
+                                <div class="value-song-label-pl">-</div>
+                                <div class="value-playlist-label-pl mt-1"></div>
                             </div>
                         </div>
                         <div class="bar-container instrumentalness">
                             <div class="bar-label">instrumentalness</div>
                             <div class="two-bar">
                                 <div class="bar">
-                                    <div class="bar-inner value-song"></div>
+                                    <div class="bar-inner value-song-pl"></div>
                                 </div>
                                 <div class="bar mt-1">
-                                    <div class="bar-inner value-playlist"></div>
+                                    <div class="bar-inner value-playlist-pl"></div>
                                 </div>
                             </div>
                             <div class="values-container">
-                                <div class="value-song-label">-</div>
-                                <div class="value-playlist-label mt-1"></div>
+                                <div class="value-song-label-pl">-</div>
+                                <div class="value-playlist-label-pl mt-1"></div>
                             </div>
                         </div>
                         <div class="bar-container tempo">
                             <div class="bar-label">tempo</div>
                             <div class="two-bar">
                                 <div class="bar">
-                                    <div class="bar-inner value-song"></div>
+                                    <div class="bar-inner value-song-pl"></div>
                                 </div>
                                 <div class="bar mt-1">
-                                    <div class="bar-inner value-playlist"></div>
+                                    <div class="bar-inner value-playlist-pl"></div>
                                 </div>
                             </div>
                             <div class="values-container">
-                                <div class="value-song-label">-</div>
-                                <div class="value-playlist-label mt-1"></div>
+                                <div class="value-song-label-pl">-</div>
+                                <div class="value-playlist-label-pl mt-1"></div>
                             </div>
                         </div>
                         <div class="bar-container valence">
                             <div class="bar-label">valence</div>
                             <div class="two-bar">
                                 <div class="bar">
-                                    <div class="bar-inner value-song"></div>
+                                    <div class="bar-inner value-song-pl"></div>
                                 </div>
                                 <div class="bar mt-1">
-                                    <div class="bar-inner value-playlist"></div>
+                                    <div class="bar-inner value-playlist-pl"></div>
                                 </div>
                             </div>
                             <div class="values-container">
-                                <div class="value-song-label">-</div>
-                                <div class="value-playlist-label mt-1"></div>
+                                <div class="value-song-label-pl">-</div>
+                                <div class="value-playlist-label-pl mt-1"></div>
                             </div>
                         </div>
                     </div>
@@ -134,11 +255,11 @@
             <h4 class="text-white mt-2">Géneros en común de la canción con la playlist</h4>
             <div class="p-2 pl_derecha lista_canciones">
                 <div class="genres-container text-center text-white">
-                        <div class="genre none mt-2" id="genre1"></div>
-                        <div class="genre none mt-2" id="genre2"></div>
-                        <div class="genre none mt-2" id="genre3"></div>
-                        <div class="genre none mt-2" id="genre4"></div>
-                        <div class="genre none mt-2" id="genre5"></div>
+                        <div class="genre none mt-2" id="genre1-pl"></div>
+                        <div class="genre none mt-2" id="genre2-pl"></div>
+                        <div class="genre none mt-2" id="genre3-pl"></div>
+                        <div class="genre none mt-2" id="genre4-pl"></div>
+                        <div class="genre none mt-2" id="genre5-pl"></div>
                 </div>
             </div>
         </div>
@@ -146,65 +267,152 @@
     
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
 <script>
-    const np = math;
-    function actualizar(r) {
-        const barsContainer = document.querySelector('.bars-container');
-        const genresContainer = document.querySelector('.genres-container');
-        const atributos = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'tempo', 'valence'];
-        
-        atributos.forEach(atributo => {
-            const valor = (r['valores'][atributo]*100).toFixed(2);
-            const barra = document.querySelector(`.${atributo} .value-song`);
-            const etiqueta = document.querySelector(`.${atributo} .value-song-label`);
-            
-            barra.style.width = valor + '%';
-            etiqueta.textContent = valor;
-        });
+    function isElementVisible(element) {
+        return element && window.getComputedStyle(element).display !== 'none';
+    }
 
-        const generos = r['genres'];
-        if (generos.length === 0) {
-            const genre = document.querySelector(`#genre1`);
-            genre.textContent = 'No hay géneros en común con la playlist';
-            genre.style.display = 'block';
-            const genre2 = document.querySelector(`#genre2`);
-            genre2.style.display = 'none';
-            const genre3 = document.querySelector(`#genre3`);
-            genre3.style.display = 'none';
-            const genre4 = document.querySelector(`#genre4`);
-            genre4.style.display = 'none';
-            const genre5 = document.querySelector(`#genre5`);
-            genre5.style.display = 'none';
+    function next() {
+        currentIndex = currentIndex + 1;
+        if (currentIndex === recs.length) {
+            alert('No hay más recomendaciones');
         }
-        else{
-            generos.forEach((genero, i) => {
-                const genre = document.querySelector(`#genre${i+1}`);
-                genre.textContent = genero;
-                genre.style.display = 'block';
+        let rec = recs[currentIndex];
+        actualizar(rec, playlist);
+    }
+
+    function previous() {
+        currentIndex = currentIndex - 1;
+        if (currentIndex < 0) {
+            alert('Esa era la primera recomendación');
+        }
+        let rec = recs[currentIndex];
+        actualizar(rec, playlist);
+    }
+
+    window.onload = function() {
+        const containerMovil = document.querySelector('.contenedor_principal_movil');
+        const containerOrdenador = document.querySelector('.contenedor_principal_ordenador');
+
+        if (isElementVisible(containerMovil)) {
+            let rec = recs[currentIndex];
+            actualizar(rec, playlist);
+        }
+        if (isElementVisible(containerOrdenador)) {
+            actualizar(null, playlist);
+        }
+    }
+
+    function actualizar(r, playlist) {
+        const containerMovil = document.querySelector('.contenedor_principal_movil');
+        const containerOrdenador = document.querySelector('.contenedor_principal_ordenador');
+        const atributos = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'tempo', 'valence'];
+
+        if (isElementVisible(containerMovil)) {
+            document.getElementById('spotify-iframe').src = `https://open.spotify.com/embed/track/${r.id}?utm_source=generator&theme=0`;
+            atributos.forEach(atributo => {
+                if (r !== null) {
+                    const valorS = (r['valores'][atributo]*100).toFixed(2);
+                    const barraS = document.querySelector(`.${atributo} .value-song`);
+                    const etiquetaS = document.querySelector(`.${atributo} .value-song-label`);
+                    barraS.style.width = valorS + '%';
+                    etiquetaS.textContent = valorS;
+                }                
+                const valorPl = (playlist[atributo]*100).toFixed(2);
+                const barraPl = document.querySelector(`.${atributo} .value-playlist`);
+                const etiquetaPl = document.querySelector(`.${atributo} .value-playlist-label`);                
+                barraPl.style.width = valorPl + '%';
+                etiquetaPl.textContent = valorPl;
             });
+
+            if (r !== null) {
+                const generos = r['genres'];
+                if (generos.length === 0) {
+                    const genre = document.querySelector(`#genre1`);
+                    genre.textContent = 'No hay géneros en común con la playlist';
+                    genre.style.display = 'block';
+                    const genre2 = document.querySelector(`#genre2`);
+                    genre2.style.display = 'none';
+                    const genre3 = document.querySelector(`#genre3`);
+                    genre3.style.display = 'none';
+                    const genre4 = document.querySelector(`#genre4`);
+                    genre4.style.display = 'none';
+                    const genre5 = document.querySelector(`#genre5`);
+                    genre5.style.display = 'none';
+                }
+                else{
+                    generos.forEach((genero, i) => {
+                        const genre = document.querySelector(`#genre${i+1}`);
+                        genre.textContent = genero;
+                        genre.style.display = 'block';
+                    });
+                }
+            }
+        }
+
+        if (isElementVisible(containerOrdenador)) {
+            atributos.forEach(atributo => {
+                if (r !== null) {
+                    const valorS = (r['valores'][atributo]*100).toFixed(2);
+                    const barraS = document.querySelector(`.${atributo} .value-song-pl`);
+                    const etiquetaS = document.querySelector(`.${atributo} .value-song-label-pl`);
+                    barraS.style.width = valorS + '%';
+                    etiquetaS.textContent = valorS;
+                }                
+                const valorPl = (playlist[atributo]*100).toFixed(2);
+                const barraPl = document.querySelector(`.${atributo} .value-playlist-pl`);
+                const etiquetaPl = document.querySelector(`.${atributo} .value-playlist-label-pl`);                
+                barraPl.style.width = valorPl + '%';
+                etiquetaPl.textContent = valorPl;
+            });
+
+            if (r !== null) {
+                const generos = r['genres'];
+                if (generos.length === 0) {
+                    const genre = document.querySelector(`#genre1-pl`);
+                    genre.textContent = 'No hay géneros en común con la playlist';
+                    genre.style.display = 'block';
+                    const genre2 = document.querySelector(`#genre2-pl`);
+                    genre2.style.display = 'none';
+                    const genre3 = document.querySelector(`#genre3-pl`);
+                    genre3.style.display = 'none';
+                    const genre4 = document.querySelector(`#genre4-pl`);
+                    genre4.style.display = 'none';
+                    const genre5 = document.querySelector(`#genre5-pl`);
+                    genre5.style.display = 'none';
+                }
+                else{
+                    generos.forEach((genero, i) => {
+                        const genre = document.querySelector(`#genre${i+1}-pl`);
+                        genre.textContent = genero;
+                        genre.style.display = 'block';
+                    });
+                }
+            }
+        }      
+    }
+
+    function handleResize() {
+        const containerMovil = document.querySelector('.contenedor_principal_movil');
+        const containerOrdenador = document.querySelector('.contenedor_principal_ordenador');
+
+        if (isElementVisible(containerMovil)) {
+            let rec = recs[currentIndex];
+            actualizar(rec, playlist);
+        }
+        if (isElementVisible(containerOrdenador)) {
+            actualizar(null, playlist);
         }
     }
 
-    // Función para actualizar las barras dinámicamente
-    function actualizarBarras(valores) {
-        const atributos = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'tempo', 'valence'];
-        
-        atributos.forEach(atributo => {
-            const valor = (valores[atributo]*100).toFixed(2);
-            const barra = document.querySelector(`.${atributo} .value-playlist`);
-            const etiqueta = document.querySelector(`.${atributo} .value-playlist-label`);
-            
-            barra.style.width = valor + '%';
-            etiqueta.textContent = valor;
-        });
-    }
+    // Escuchar cambios en el tamaño de la ventana
+    window.addEventListener('resize', handleResize);
+
+    let currentIndex = 0;
+    const recs = {{ recs|safe }};
 
     // Valores pasados desde Django al template
-    const valoresCancion = {{ mean_feat|safe }};
-
-    // Actualizar las barras con los valores pasados
-    actualizarBarras(valoresCancion);
+    const playlist = {{ mean_feat|safe }};
 
     // Lazy loading de iframes
     const iframes = document.querySelectorAll('iframe[data-src]');
@@ -224,77 +432,4 @@
     });
 </script>
 
-<!--<div class="container text-center mt-2">
-    <div class="info">
-        <h2 class="text-white">Recomendaciones para {{ playlist.name }}</h2>
-    </div>
-    <div class="contenedor_principal">
-        <div class="mitad izquierda ">
-            <h4 class="text-white">Recomendaciones</h4>
-            <div class="overflow-auto p-2 lista_canciones lista_derecha">
-                <ul>
-                    {% for r in recs %}
-                        <li style="margin: 0; padding: 0;">
-                            <div class="iframe-container">
-                                <iframe style="border-radius:12px; margin: 0; padding: 0; height: 85px;"
-                                    onmouseover="actualizar({{ r|safe }})"
-                                    data-src="https://open.spotify.com/embed/track/{{r.id}}?utm_source=generator&theme=0"
-                                    width="100%" height="125" frameBorder="0" allowfullscreen=""
-                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                    loading="lazy">
-                                </iframe>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function actualizar(r) {
-        const atributos = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'tempo', 'valence'];
-        
-        atributos.forEach(atributo => {
-            const valor = (r['valores'][atributo]*100).toFixed(2);
-            const barra = document.querySelector(`.${atributo} .value-song`);
-            const etiqueta = document.querySelector(`.${atributo} .value-song-label`);
-            
-            barra.style.width = valor + '%';
-            etiqueta.textContent = valor;
-        });
-
-        const generos = r['genres'];
-        if (generos.length === 0) {
-            const genre = document.querySelector(`#genre1`);
-            genre.textContent = 'No hay géneros en común con la playlist';
-            genre.style.display = 'block';
-        } else {
-            generos.forEach((genero, i) => {
-                const genre = document.querySelector(`#genre${i+1}`);
-                genre.textContent = genero;
-                genre.style.display = 'block';
-            });
-        }
-    }
-
-    // Lazy loading de iframes
-    const iframes = document.querySelectorAll('iframe[data-src]');
-
-    const iframeObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const iframe = entry.target;
-                iframe.src = iframe.dataset.src;
-                observer.unobserve(iframe);
-            }
-        });
-    });
-
-    iframes.forEach(iframe => {
-        iframeObserver.observe(iframe);
-    });
-</script>-->
 {% endblock %}
-

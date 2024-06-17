@@ -78,6 +78,11 @@ ul {
   border-radius: 12px;
 }
 
+.lista_canciones_recs {
+  background-color: #363434;
+  border-radius: 12px;
+}
+
 .lista_izquierda {
   height: 80%;
 }
@@ -86,6 +91,10 @@ ul {
   height: 100%;
 }
 .pl_derecha{
+  height: 36.5%;
+}
+
+.generos_recs{
   height: 36.5%;
 }
 
@@ -194,6 +203,50 @@ ul {
   background-color: #aa8585;
 }
 
+.value-song-label-pl {
+  width: 100%;
+}
+.value-playlist-label-pl {
+  width: 100%;
+}
+.acousticness .value-song-pl {
+  background-color: #a8e6cf;
+}
+.danceability .value-song-pl {
+  background-color: #dcedc1;
+}
+.energy .value-song-pl {
+  background-color: #ffd3b6;
+}
+.instrumentalness .value-song-pl {
+  background-color: #ffaaa5;
+}
+.tempo .value-song-pl {
+  background-color: #ff8b94;
+}
+.valence .value-song-pl {
+  background-color: #d4a5a5;
+}
+
+.acousticness .value-playlist-pl {
+  background-color: #98cfbb;
+}
+.danceability .value-playlist-pl {
+  background-color: #c2d0ab;
+}
+.energy .value-playlist-pl {
+  background-color: #e0baa1;
+}
+.instrumentalness .value-playlist-pl {
+  background-color: #db928e;
+}
+.tempo .value-playlist-pl {
+  background-color: #d4727a;
+}
+.valence .value-playlist-pl {
+  background-color: #aa8585;
+}
+
 .genre {
   background-color: #00cc66;
   color: #3a3a3a;
@@ -208,7 +261,12 @@ ul {
   display: none;
 }
 
-.genres-container {
+.genres-container-mov {
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.genres-container-ord {
   margin-bottom: 10px;
   justify-content: center;
 }
@@ -311,7 +369,44 @@ ul {
   border: 1px solid #464444;  /* Ajusta el color del borde según sea necesario */
 }
 
+.contenedor_principal_ordenador {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.contenedor_principal_movil {
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.botones {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.botones svg {
+  margin: 0 10px;
+}
+
+/* Media queries */
+/* Si el ancho de la ventana es de 768px o mas */
 @media (max-width: 768px) {
+  .lista_canciones_recs {
+    height: 70vh;
+  }
+
+  .contenedor_principal_ordenador {
+    display: none; /* Oculta el contenedor principal en móvil */
+  }
+
+  .contenedor_principal_movil {
+    display: flex; /* Muestra el contenedor principal en móvil */
+    flex-direction: column; /* Cambia la dirección del flex a columna */
+  }
+
   .contenedor_principal {
     flex-direction: column; /* Cambia la dirección del flex a columna */
   }
@@ -337,7 +432,12 @@ ul {
   }
 
   .pl_derecha {
-    height: 28%; /* Ajusta la altura de la lista de reproducción */
+    height: 36.5%; /* Ajusta la altura de la lista de reproducción */
+    margin-bottom: 10px;
+  }
+
+  .generos_recs{
+    height: 40%;
   }
 
   .bar-container {
@@ -355,6 +455,14 @@ ul {
   }
 
   .value-label {
+    display: none; /* Oculta los valores porcentuales en móvil */
+  }
+
+  .value-playlist-label {
+    display: none; /* Oculta los valores porcentuales en móvil */
+  }
+
+  .value-song-label {
     display: none; /* Oculta los valores porcentuales en móvil */
   }
 }
